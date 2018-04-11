@@ -1,0 +1,52 @@
+package com.xuzhiguang.kotlinstudybyself.forecast
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import com.xuzhiguang.kotlinstudybyself.BR
+import com.xuzhiguang.kotlinstudybyself.R
+import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
+import com.xuzhiguang.xzglibrary.view.XAdapter
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+    private val items = listOf(
+            "Mon 6/23 - Sunny - 31/17",
+            "Tue 6/24 - Foggy - 21/8",
+            "Wed 6/25 - Cloudy - 22/17",
+            "Thurs 6/26 - Rainy - 18/11",
+            "Fri 6/27 - Foggy - 21/10",
+            "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
+            "Sun 6/29 - Sunny - 20/7"
+    )
+
+    var dataList = mutableListOf<WeatherBean>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        createData()
+        initView()
+    }
+
+    private fun createData() {
+
+        for (i in 0..20) {
+            val bean = WeatherBean()
+            bean.case = "晴天" + i
+            bean.city = "北京"
+            bean.date = "2018-09-0$i"
+            dataList.add(bean)
+        }
+    }
+
+    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast)
+    var adapter1: ForecastListAdapter<WeatherBean, ItemForeCastBinding> = ForecastListAdapter(BR.data, R.layout.item_fore_cast)
+
+
+    private fun initView() {
+        forecast_list.layoutManager = LinearLayoutManager(this)
+        forecast_list.adapter = adapter
+        adapter.dataList = dataList
+    }
+}

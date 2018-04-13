@@ -6,8 +6,16 @@ import android.support.v7.widget.LinearLayoutManager
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
+import com.xuzhiguang.kotlinstudybyself.forecast.db.service.APIService
+import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.DataUser
+import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.ResultModel
 import com.xuzhiguang.xzglibrary.view.XAdapter
+import com.xuzhiguang.xzglibrary.view.http.FlatMapResponse
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Response
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
     private val items = listOf(
@@ -26,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createData()
+        getData()
         initView()
     }
 
@@ -43,10 +52,35 @@ class MainActivity : AppCompatActivity() {
     var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast)
     var adapter1: ForecastListAdapter<WeatherBean, ItemForeCastBinding> = ForecastListAdapter(BR.data, R.layout.item_fore_cast)
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    private fun getData() {
+        var param = mapOf("accountNum" to "susan", "password" to "1")
+        APIService.get().login(param)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+//                .flatMap { t -> FlatMapResponse<ResultModel<Void>>().returnObserable(t) }
+                .subscribe()
+    }
+
+    fun flat(t: Response<DataUser>): Observable<DataUser> {
+        return Observable.just(t.body())
+    }
 
     private fun initView() {
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.adapter = adapter
         adapter.dataList = dataList
     }
+
+
 }
+
+
+
+
+
+

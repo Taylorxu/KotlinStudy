@@ -1,4 +1,4 @@
-package com.xuzhiguang.xzglibrary.view.http
+package com.xuzhiguang.xzglibrary.http
 
 /**
  * Created by Administrator on 2018/4/12.

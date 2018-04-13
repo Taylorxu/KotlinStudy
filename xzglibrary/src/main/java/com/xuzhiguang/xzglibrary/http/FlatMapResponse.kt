@@ -1,8 +1,7 @@
-package com.xuzhiguang.xzglibrary.view.http
+package com.xuzhiguang.xzglibrary.http
 
 import retrofit2.Response
 import rx.Observable
-import rx.functions.Func1
 import java.io.IOException
 
 /**
@@ -10,13 +9,11 @@ import java.io.IOException
  */
 class FlatMapResponse<T>   {
 
-
-    fun returnObserable(t: Response<T>): Observable<T> {
-
-        if (t.isSuccessful) {
-            return Observable.just(t.body())
+    fun call(t: Response<T>): Observable<T> {
+        return if (t.isSuccessful) {
+            Observable.just(t.body())
         } else {
-            return try {
+            try {
                 Observable.error<T>(Error(t.code(), t.errorBody().string()))
             } catch (e: IOException) {
                 Observable.error<T>(Error(t.code(), e.message))

@@ -2,9 +2,8 @@ package com.xuzhiguang.kotlinstudybyself.forecast.db.service
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.DataUser
-import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.ResultModel
-import com.xuzhiguang.xzglibrary.view.http.XRequest
+import com.xuzhiguang.xzglibrary.http.ResultModel
+import com.xuzhiguang.xzglibrary.http.XRequest
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
@@ -20,7 +19,7 @@ import rx.Observable
 interface APIService {
     @FormUrlEncoded
     @POST("UserLoginServlet")
-    fun login(@FieldMap param: Map<String, String>): Observable<Response<ResultModel<Void>>>
+    fun login(@FieldMap param: Map<String, String>): Observable<Response<ResultModel<Void?>>>
 
 
 

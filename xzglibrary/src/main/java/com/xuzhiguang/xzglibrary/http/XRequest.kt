@@ -1,15 +1,11 @@
-package com.xuzhiguang.xzglibrary.view.http
+package com.xuzhiguang.xzglibrary.http
 
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.parkingwang.okhttp3.LogInterceptor.LogInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**

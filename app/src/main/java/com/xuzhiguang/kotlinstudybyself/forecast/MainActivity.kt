@@ -3,17 +3,22 @@ package com.xuzhiguang.kotlinstudybyself.forecast
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import android.widget.Toast
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.APIService
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.DataUser
-import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.ResultModel
+import com.xuzhiguang.xzglibrary.helperTool.NiceToast
+import com.xuzhiguang.xzglibrary.http.ResultModel
 import com.xuzhiguang.xzglibrary.view.XAdapter
-import com.xuzhiguang.xzglibrary.view.http.FlatMapResponse
+import com.xuzhiguang.xzglibrary.http.FlatMapResponse
+import com.xuzhiguang.xzglibrary.http.FlatMapResult
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 import rx.Observable
+import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -62,8 +67,22 @@ class MainActivity : AppCompatActivity() {
         APIService.get().login(param)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-//                .flatMap { t -> FlatMapResponse<ResultModel<Void>>().returnObserable(t) }
-                .subscribe()
+                .flatMap { t -> FlatMapResponse<ResultModel<Void?>>().call(t) }
+                .flatMap { t -> FlatMapResult<Void?>().call(t) }
+                .subscribe(object : Subscriber<Void?>() {
+                    override fun onError(e: Throwable?) {
+                        Log.e(localClassName + "74r", e?.printStackTrace().toString())
+//                        NiceToast.toast("登陆失败${e?.message}")
+                    }
+
+                    override fun onCompleted() {
+                    }
+
+                    override fun onNext(v: Void?) {
+                        NiceToast.toast("登陆成功")
+                    }
+
+                })
     }
 
     fun flat(t: Response<DataUser>): Observable<DataUser> {

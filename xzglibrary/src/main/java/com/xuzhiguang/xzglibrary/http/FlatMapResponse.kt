@@ -6,6 +6,8 @@ import java.io.IOException
 
 /**
  * Created by Administrator on 2018/4/12.
+ * Response retorfit 接口 返回的第一层 response
+ * 通过Observable在将返回的结果发送到下一层
  */
 class FlatMapResponse<T>   {
 

@@ -15,6 +15,7 @@ import com.xuzhiguang.xzglibrary.http.ResultModel
 import com.xuzhiguang.xzglibrary.view.XAdapter
 import com.xuzhiguang.xzglibrary.http.FlatMapResponse
 import com.xuzhiguang.xzglibrary.http.FlatMapResult
+import com.xuzhiguang.xzglibrary.view.XViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 import rx.Observable
@@ -43,6 +44,13 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
+    private fun initView() {
+        forecast_list.layoutManager = LinearLayoutManager(this)
+        forecast_list.adapter = adapter
+        adapter.dataList = dataList
+
+    }
+
     private fun createData() {
 
         for (i in 0..20) {
@@ -54,14 +62,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast)
-    var adapter1: ForecastListAdapter<WeatherBean, ItemForeCastBinding> = ForecastListAdapter(BR.data, R.layout.item_fore_cast)
-
-    override fun onResume() {
-        super.onResume()
-
+    //匿名内部类
+    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = object : XAdapter.SimpleAdapter<WeatherBean, ItemForeCastBinding>(BR.data, R.layout.item_fore_cast) {
+        override fun onBindViewHolder(holder: XViewHolder<WeatherBean, ItemForeCastBinding>?, position: Int) {
+            super.onBindViewHolder(holder, position)
+        }
     }
 
+    //    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> =  XAdapter.SimpleAdapter (BR.data, R.layout.item_fore_cast)
     private fun getData() {
         var param = mapOf("accountNum" to "susan", "password" to "1")
         APIService.get().login(param)
@@ -72,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 .subscribe(object : Subscriber<Void?>() {
                     override fun onError(e: Throwable?) {
                         Log.e(localClassName + "74r", e?.printStackTrace().toString())
-//                        NiceToast.toast("登陆失败${e?.message}")
+                        NiceToast.toast("登陆失败${e?.message}")
                     }
 
                     override fun onCompleted() {
@@ -83,16 +91,6 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
-    }
-
-    fun flat(t: Response<DataUser>): Observable<DataUser> {
-        return Observable.just(t.body())
-    }
-
-    private fun initView() {
-        forecast_list.layoutManager = LinearLayoutManager(this)
-        forecast_list.adapter = adapter
-        adapter.dataList = dataList
     }
 
 

@@ -38,12 +38,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createData()
-        getData()
+//        getData()
         initView()
     }
 
     private fun initView() {
         xToolbar.setTitle("main Page")
+        xToolbar.setBack(true,this)
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.adapter = adapter
         adapter.dataList = dataList

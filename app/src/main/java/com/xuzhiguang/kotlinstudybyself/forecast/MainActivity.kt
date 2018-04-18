@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
+import com.xuzhiguang.kotlinstudybyself.R.id.xToolbar
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.APIService
 import com.xuzhiguang.xzglibrary.helperTool.NiceToast
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        xToolbar.setTitle("main Page")
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.adapter = adapter
         adapter.dataList = dataList

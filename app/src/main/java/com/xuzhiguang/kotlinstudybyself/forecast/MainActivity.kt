@@ -4,12 +4,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.widget.Toast
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.APIService
-import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.DataUser
 import com.xuzhiguang.xzglibrary.helperTool.NiceToast
 import com.xuzhiguang.xzglibrary.http.ResultModel
 import com.xuzhiguang.xzglibrary.view.XAdapter
@@ -17,13 +15,12 @@ import com.xuzhiguang.xzglibrary.http.FlatMapResponse
 import com.xuzhiguang.xzglibrary.http.FlatMapResult
 import com.xuzhiguang.xzglibrary.view.XViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Response
-import rx.Observable
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
+    //不可操作list
     private val items = listOf(
             "Mon 6/23 - Sunny - 31/17",
             "Tue 6/24 - Foggy - 21/8",
@@ -33,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
             "Sun 6/29 - Sunny - 20/7"
     )
-
+    //可操作list
     var dataList = mutableListOf<WeatherBean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,8 +45,24 @@ class MainActivity : AppCompatActivity() {
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.adapter = adapter
         adapter.dataList = dataList
+        adapter.itemClickListener = onItemClickListenter
+    }
+
+    /* //匿名内部类
+        var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = object : XAdapter.SimpleAdapter<WeatherBean, ItemForeCastBinding>(BR.data, R.layout.item_fore_cast) {
+            override fun onBindViewHolder(holder: XViewHolder<WeatherBean, ItemForeCastBinding>?, position: Int) {
+                super.onBindViewHolder(holder, position)
+            }
+        }*/
+    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast)
+    //添加item监听事件
+    var onItemClickListenter: XAdapter.OnItemClickListener<WeatherBean, ItemForeCastBinding> = object : XAdapter.OnItemClickListener<WeatherBean, ItemForeCastBinding> {
+        override fun onItemClick(h: XViewHolder<WeatherBean, ItemForeCastBinding>) {
+            h.binding.data?.case?.let { NiceToast.toast(it) }
+        }
 
     }
+
 
     private fun createData() {
 
@@ -62,14 +75,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //匿名内部类
-    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = object : XAdapter.SimpleAdapter<WeatherBean, ItemForeCastBinding>(BR.data, R.layout.item_fore_cast) {
-        override fun onBindViewHolder(holder: XViewHolder<WeatherBean, ItemForeCastBinding>?, position: Int) {
-            super.onBindViewHolder(holder, position)
-        }
-    }
 
-    //    var adapter: XAdapter<WeatherBean, ItemForeCastBinding> =  XAdapter.SimpleAdapter (BR.data, R.layout.item_fore_cast)
     private fun getData() {
         var param = mapOf("accountNum" to "susan", "password" to "1")
         APIService.get().login(param)

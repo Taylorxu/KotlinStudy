@@ -38,7 +38,6 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.android.support:design:26.1.0'
     implementation project(':xzglibrary')
-    compile 'com.github.Aspsine:IRecyclerView:0.0.5'
     compile "com.android.support:recyclerview-v7:$support_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

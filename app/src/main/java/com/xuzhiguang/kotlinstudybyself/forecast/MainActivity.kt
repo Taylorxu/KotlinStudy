@@ -6,16 +6,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
-import com.xuzhiguang.kotlinstudybyself.R.id.xToolbar
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.APIService
 import com.xuzhiguang.xzglibrary.helperTool.NiceToast
+import com.xuzhiguang.xzglibrary.helperTool.Passenger
 import com.xuzhiguang.xzglibrary.http.ResultModel
 import com.xuzhiguang.xzglibrary.view.XAdapter
 import com.xuzhiguang.xzglibrary.http.FlatMapResponse
 import com.xuzhiguang.xzglibrary.http.FlatMapResult
 import com.xuzhiguang.xzglibrary.view.XViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.startActivity
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         xToolbar.setTitle("main Page")
-        xToolbar.setBack(true,this)
+        xToolbar.setBack(true, this)
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.adapter = adapter
         adapter.dataList = dataList
@@ -61,7 +63,12 @@ class MainActivity : AppCompatActivity() {
     //添加item监听事件
     var onItemClickListenter: XAdapter.OnItemClickListener<WeatherBean, ItemForeCastBinding> = object : XAdapter.OnItemClickListener<WeatherBean, ItemForeCastBinding> {
         override fun onItemClick(h: XViewHolder<WeatherBean, ItemForeCastBinding>) {
-            h.binding.data?.case?.let { NiceToast.toast(it) }
+            startActivity<DetailActivity>()
+            var passenger = Passenger<WeatherBean>(1)
+            passenger.extra = h.binding.data
+            //发送黏贴事件
+            EventBus.getDefault().postSticky(passenger)
+
         }
 
     }

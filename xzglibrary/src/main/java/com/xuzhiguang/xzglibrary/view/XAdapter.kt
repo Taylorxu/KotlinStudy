@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import java.util.ArrayList
 
 /**
- * Created by Administrator on 2018/4/11.
+ * Created by 徐志广 on 2018/4/11.
  */
 open abstract class XAdapter<Data, Binding : ViewDataBinding> : RecyclerView.Adapter<XViewHolder<Data, Binding>>() {
     var dataList = mutableListOf<Data>()

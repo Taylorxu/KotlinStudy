@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.xuzhiguang.xzglibrary.view.XViewHolder
 
 /**
- * Created by Administrator on 2018/3/27.
+ * Created by 徐志广 on 2018/3/27.
  */
  open class ForecastListAdapter<Data, Binding : ViewDataBinding>(var variableId: Int, var holderLayout: Int) : RecyclerView.Adapter<XViewHolder<Data, Binding>>() {
     var dataList: List<Data>? = ArrayList()

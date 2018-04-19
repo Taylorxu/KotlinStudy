@@ -11,10 +11,11 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.xuzhiguang.xzglibrary.R
+import com.xuzhiguang.xzglibrary.helperTool.LogHelper
 import org.w3c.dom.Text
 
 /**
- * Created by Administrator on 2018/4/18.
+ * Created by 徐志广 on 2018/4/18.
  */
 open class XToolbar : RelativeLayout {
     //    constructor(context: Context) : super(context)
@@ -102,6 +103,7 @@ open class XToolbar : RelativeLayout {
         }
         if (listener != null)
             tv_title_right?.setOnClickListener(listener)
+        LogHelper.e("")
     }
 
 }

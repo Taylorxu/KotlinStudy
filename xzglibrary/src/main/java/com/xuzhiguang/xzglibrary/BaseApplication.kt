@@ -5,7 +5,7 @@ import android.content.Context
 import kotlin.properties.Delegates
 
 /**
- * Created by Administrator on 2018/4/13.
+ * Created by 徐志广 on 2018/4/13.
  */
 open class BaseApplication : Application() {
 

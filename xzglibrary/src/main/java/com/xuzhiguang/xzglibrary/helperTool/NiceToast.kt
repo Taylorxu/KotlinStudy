@@ -4,7 +4,7 @@ import android.widget.Toast
 import com.xuzhiguang.xzglibrary.BaseApplication
 
 /**
- * Created by Administrator on 2018/4/13.
+ * Created by 徐志广 on 2018/4/13.
  */
 object NiceToast {
     fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {

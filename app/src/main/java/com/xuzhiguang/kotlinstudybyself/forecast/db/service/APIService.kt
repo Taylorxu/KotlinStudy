@@ -14,7 +14,7 @@ import retrofit2.http.POST
 import rx.Observable
 
 /**
- * Created by Administrator on 2018/4/12.
+ * Created by 徐志广 on 2018/4/12.
  */
 interface APIService {
     @FormUrlEncoded

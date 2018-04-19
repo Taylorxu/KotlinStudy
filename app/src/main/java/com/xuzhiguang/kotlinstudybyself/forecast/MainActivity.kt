@@ -2,8 +2,10 @@ package com.xuzhiguang.kotlinstudybyself.forecast
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import com.aspsine.irecyclerview.OnRefreshListener
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
@@ -22,7 +24,9 @@ import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnRefreshListener {
+
+
     //不可操作list
     private val items = listOf(
             "Mon 6/23 - Sunny - 31/17",
@@ -39,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createData()
+//        createData()
 //        getData()
         initView()
     }
@@ -48,9 +52,13 @@ class MainActivity : AppCompatActivity() {
         xToolbar.setTitle("main Page")
         xToolbar.setBack(true, this)
         forecast_list.layoutManager = LinearLayoutManager(this)
-        forecast_list.adapter = adapter
-        adapter.dataList = dataList
+        forecast_list.iAdapter = adapter
+        forecast_list.setOnRefreshListener(this)
+        forecast_list.post {
+            forecast_list.setRefreshing(true)
+        }
         adapter.itemClickListener = onItemClickListenter
+
     }
 
     /* //匿名内部类
@@ -73,9 +81,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //listView 的刷新监听
+    override fun onRefresh() {
+        createData()
+    }
 
     private fun createData() {
-
+        if (dataList.size > 0) dataList.clear()
         for (i in 0..20) {
             val bean = WeatherBean()
             bean.case = "晴天" + i
@@ -83,9 +95,14 @@ class MainActivity : AppCompatActivity() {
             bean.date = "2018-09-0$i"
             dataList.add(bean)
         }
+        adapter.dataList = dataList
+        Handler().postDelayed({ forecast_list.setRefreshing(false) }, 3000)
+
     }
 
-
+    /**
+     * 接口数据请求
+     */
     private fun getData() {
         var param = mapOf("accountNum" to "susan", "password" to "1")
         APIService.get().login(param)
@@ -111,6 +128,7 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
 
 
 

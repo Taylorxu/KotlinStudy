@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">XzgLibrary</string>
     <string name="back">返回</string>
+    <string name="swipe_refresh">下拉刷新</string>
+    <string name="release_refresh">松开刷新数据</string>
+    <string name="the_end">已加载全部</string>
+    <string name="refresh_ing">加载中</string>
+    <string name="complete">加载完毕</string>
 </resources>

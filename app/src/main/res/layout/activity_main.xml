@@ -13,8 +13,12 @@
         android:id="@+id/xToolbar"
       />
 
-    <android.support.v7.widget.RecyclerView
+    <com.aspsine.irecyclerview.IRecyclerView
         android:id="@+id/forecast_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:loadMoreEnabled="false"
+        app:refreshEnabled="true"
+        app:refreshHeaderLayout="@layout/layout_irecyclerview_refresh_header"
+        />
 </LinearLayout>

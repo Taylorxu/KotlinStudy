@@ -1,9 +1,13 @@
 package com.xuzhiguang.kotlinstudybyself.forecast
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Notification
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.xuzhiguang.kotlinstudybyself.R
+import com.xuzhiguang.xzglibrary.helperTool.CrossFadeHelper
 import com.xuzhiguang.xzglibrary.helperTool.Passenger
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.greenrobot.eventbus.EventBus
@@ -18,6 +22,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         EventBus.getDefault().register(this)  //事件注册
+        CrossFadeHelper.crossFade(tv_message, progress_bar)
     }
 
     //事件订阅
@@ -26,6 +31,7 @@ class DetailActivity : AppCompatActivity() {
         if (passenger.code == 1)
             tv_message.text = passenger.extra?.case
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

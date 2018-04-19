@@ -17,14 +17,16 @@ import com.xuzhiguang.xzglibrary.view.XAdapter
 import com.xuzhiguang.xzglibrary.http.FlatMapResponse
 import com.xuzhiguang.xzglibrary.http.FlatMapResult
 import com.xuzhiguang.xzglibrary.view.XViewHolder
+import com.xuzhiguang.xzglibrary.view.recycleViewExtension.footer.LoadMoreFooterView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-class MainActivity : AppCompatActivity(), OnRefreshListener {
+class MainActivity : AppCompatActivity() {
 
 
     //不可操作list
@@ -48,12 +50,15 @@ class MainActivity : AppCompatActivity(), OnRefreshListener {
         initView()
     }
 
+    var footerView: LoadMoreFooterView? = null
     private fun initView() {
         xToolbar.setTitle("main Page")
         xToolbar.setBack(true, this)
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.iAdapter = adapter
-        forecast_list.setOnRefreshListener(this)
+        forecast_list.setOnRefreshListener { createData() }
+        footerView = forecast_list.loadMoreFooterView as LoadMoreFooterView?
+        forecast_list.setOnLoadMoreListener { onLoadMore() }
         forecast_list.post {
             forecast_list.setRefreshing(true)
         }
@@ -81,12 +86,9 @@ class MainActivity : AppCompatActivity(), OnRefreshListener {
 
     }
 
-    //listView 的刷新监听
-    override fun onRefresh() {
-        createData()
-    }
 
     private fun createData() {
+        footerView?.setStatus(LoadMoreFooterView.Status.GONE)
         if (dataList.size > 0) dataList.clear()
         for (i in 0..20) {
             val bean = WeatherBean()
@@ -98,6 +100,33 @@ class MainActivity : AppCompatActivity(), OnRefreshListener {
         adapter.dataList = dataList
         Handler().postDelayed({ forecast_list.setRefreshing(false) }, 3000)
 
+    }
+
+    private fun onLoadMore() {
+        if (footerView?.canLoadMore()!! && adapter.itemCount > 0) {
+            footerView?.setStatus(LoadMoreFooterView.Status.LOADING)
+            loadMore()
+        }
+    }
+
+    private fun loadMore() {
+        var moreList = mutableListOf<WeatherBean>()
+        for (i in 0..20) {
+            val bean = WeatherBean()
+            bean.case = "加载--晴天" + i
+            bean.city = "加载--北京"
+            bean.date = "加载--2018-09-0$i"
+            moreList.add(bean)
+        }
+
+        if (dataList.size > 120) {
+            footerView?.setStatus(LoadMoreFooterView.Status.THE_END)
+        } else {
+            footerView?.postDelayed({
+                adapter.addItems(moreList)
+                footerView?.setStatus(LoadMoreFooterView.Status.GONE)
+            }, 2000)
+        }
     }
 
     /**

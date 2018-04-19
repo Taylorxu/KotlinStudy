@@ -6,4 +6,5 @@
     <string name="the_end">已加载全部</string>
     <string name="refresh_ing">加载中</string>
     <string name="complete">加载完毕</string>
+    <string name="error">加载失败 请重试</string>
 </resources>

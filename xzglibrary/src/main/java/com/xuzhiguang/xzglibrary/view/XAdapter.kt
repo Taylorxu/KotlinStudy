@@ -59,6 +59,14 @@ open abstract class XAdapter<Data, Binding : ViewDataBinding> : RecyclerView.Ada
         notifyDataSetChanged()
     }
 
+    //追加list
+    fun addItems(l: MutableList<Data>) {
+        if (l === null || l.isEmpty()) return
+        dataList?.addAll(l)
+        notifyItemInserted(dataList?.size?.let { it - 1 })
+        notifyItemRangeChanged(dataList?.size - l.size, l.size)
+    }
+
     //追加item
     fun addItem(data: Data) {
         dataList?.add(data)

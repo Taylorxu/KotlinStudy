@@ -17,8 +17,9 @@
         android:id="@+id/forecast_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:loadMoreEnabled="false"
+        app:loadMoreEnabled="true"
         app:refreshEnabled="true"
+        app:loadMoreFooterLayout="@layout/layout_irecyclerview_load_more_footer"
         app:refreshHeaderLayout="@layout/layout_irecyclerview_refresh_header"
         />
 </LinearLayout>

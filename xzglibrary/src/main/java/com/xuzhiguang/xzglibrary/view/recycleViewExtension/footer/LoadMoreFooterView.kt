@@ -9,7 +9,7 @@ import com.xuzhiguang.xzglibrary.R
 import kotlinx.android.synthetic.main.layout_irecyclerview_load_more_footer_view.view.*
 
 /**
- * Created by Administrator on 2018/4/19.
+ * Created by 徐志广 on 2018/4/19.
  */
 class LoadMoreFooterView : FrameLayout {
     var mStatus: Status? = null

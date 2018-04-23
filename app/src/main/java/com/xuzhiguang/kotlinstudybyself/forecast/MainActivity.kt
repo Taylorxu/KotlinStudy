@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import com.aspsine.irecyclerview.OnRefreshListener
 import com.xuzhiguang.kotlinstudybyself.BR
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.databinding.ItemForeCastBinding
@@ -19,12 +18,20 @@ import com.xuzhiguang.xzglibrary.http.FlatMapResult
 import com.xuzhiguang.xzglibrary.view.XViewHolder
 import com.xuzhiguang.xzglibrary.view.recycleViewExtension.footer.LoadMoreFooterView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import android.R.transition.explode
+import android.annotation.TargetApi
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
+import android.support.annotation.RequiresApi
+import android.transition.TransitionInflater
+import android.view.Window
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     )
     //可操作list
     var dataList = mutableListOf<WeatherBean>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,8 +83,13 @@ class MainActivity : AppCompatActivity() {
     var adapter: XAdapter<WeatherBean, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast)
     //添加item监听事件
     var onItemClickListenter: XAdapter.OnItemClickListener<WeatherBean, ItemForeCastBinding> = object : XAdapter.OnItemClickListener<WeatherBean, ItemForeCastBinding> {
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun onItemClick(h: XViewHolder<WeatherBean, ItemForeCastBinding>) {
-            startActivity<DetailActivity>()
+            //开始一个animation
+            var intent = Intent(this@MainActivity, DetailActivity().javaClass)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this@MainActivity,h.binding.root,"text_weather").toBundle())
+
+
             var passenger = Passenger<WeatherBean>(1)
             passenger.extra = h.binding.data
             //发送黏贴事件

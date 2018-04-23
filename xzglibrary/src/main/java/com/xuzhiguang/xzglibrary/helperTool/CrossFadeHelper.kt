@@ -20,13 +20,13 @@ object CrossFadeHelper {
         view.visibility = View.VISIBLE
         view.animate().alpha(1f)
                 .setListener(null)
-                .duration = 1500
+                .duration = 500
         progress_bar.animate().alpha(0f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
                         progress_bar.visibility = View.GONE
                     }
                 })
-                .duration = 1000
+                .duration = 500
     }
 }

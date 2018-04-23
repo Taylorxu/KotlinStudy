@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.layout_irecyclerview_cool_refresh_header_v
 import kotlinx.android.synthetic.main.layout_irecyclerview_cool_refresh_header_view.view.*
 
 /**
- * Created by Administrator on 2018/4/19.
+ * Created by 徐志广 on 2018/4/19.
  */
 open  class CoolHeaderView : FrameLayout, RefreshTrigger {
 

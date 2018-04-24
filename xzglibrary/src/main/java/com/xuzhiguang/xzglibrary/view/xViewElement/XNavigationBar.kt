@@ -21,16 +21,16 @@ import org.jetbrains.anko.forEachChild
 class XNavigationBar : LinearLayout {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    var p_top_c = DensityHelper.dp2px(10f)  //被选中时，paddingTop
-    var p_top_ = DensityHelper.dp2px(11f)
+    var p_top_c = DensityHelper.dp2px(8f)  //被选中时，paddingTop
+    var p_top_ = DensityHelper.dp2px(10f)
     var p_bottom = DensityHelper.dp2px(8f)
-    val text_size_c =12f  //被选中时，字体大小设置为 12
-    val text_size_ =11f
+    val text_size_c = 12f  //被选中时，字体大小设置为 12
+    val text_size_ = 11f
 
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_navigation_bar_group, this, true)
-        initViewParam()
         rb_0.isChecked = true
+        initViewParam()
         rb_group.setOnCheckedChangeListener { group, checkedId -> onCheckedChangeListener(checkedId) }
     }
 

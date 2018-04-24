@@ -7,7 +7,10 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.xuzhiguang.xzglibrary.R
-import kotlinx.android.synthetic.main.layout_navigation_bar_group.*
+import com.xuzhiguang.xzglibrary.R.id.rb_0
+import com.xuzhiguang.xzglibrary.R.id.rb_1
+import com.xuzhiguang.xzglibrary.helperTool.DensityHelper
+import com.xuzhiguang.xzglibrary.helperTool.LogHelper
 import kotlinx.android.synthetic.main.layout_navigation_bar_group.view.*
 import org.jetbrains.anko.forEachChild
 
@@ -18,6 +21,12 @@ import org.jetbrains.anko.forEachChild
 class XNavigationBar : LinearLayout {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
+    var p_top_c = DensityHelper.dp2px(10f)  //被选中时，paddingTop
+    var p_top_ = DensityHelper.dp2px(11f)
+    var p_bottom = DensityHelper.dp2px(8f)
+    val text_size_c =12f  //被选中时，字体大小设置为 12
+    val text_size_ =11f
+
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_navigation_bar_group, this, true)
         initViewParam()
@@ -26,7 +35,18 @@ class XNavigationBar : LinearLayout {
     }
 
     private fun initViewParam() {
-        rb_group.forEachChild { view: View -> view.setPadding(12, 6, 12, 10) }
+        rb_group.forEachChild { view -> setEachChild(view as RadioButton) }
+    }
+
+    fun setEachChild(v: RadioButton) {
+        if (v.isChecked) {
+            v.textSize = text_size_c
+            v.setPadding(0, p_top_c, 0, p_bottom)
+        } else {
+            v.setPadding(0, p_top_, 0, p_bottom)
+            v.textSize = text_size_
+        }
+
     }
 
     var oldChecked: RadioButton? = null
@@ -34,27 +54,25 @@ class XNavigationBar : LinearLayout {
         when (checkedId) {
             R.id.rb_0 -> {
                 reSetOldChecked(rb_0)
-//                rb_0.setPadding(0, 6, 0, 0)
             }
             R.id.rb_1 -> {
                 reSetOldChecked(rb_1)
-//                rb_1.setPadding(0, 6, 0, 0)
             }
             R.id.rb_2 -> {
                 reSetOldChecked(rb_2)
-                rb_2.setPadding(0, 6, 0, 0)
             }
             R.id.rb_3 -> {
                 reSetOldChecked(rb_3)
-//                rb_3.setPadding(0, 6, 0, 0)
             }
 
         }
     }
 
     fun reSetOldChecked(newChecked: RadioButton) {
-        newChecked.setPadding(10, 6, 10, 10)
-        oldChecked?.setPadding(12, 8, 12, 10)
+        newChecked.setPadding(0, p_top_c, 0, p_bottom)
+        newChecked.textSize = text_size_c
+        oldChecked?.setPadding(0, p_top_, 0, p_bottom)
+        oldChecked?.textSize = text_size_
         oldChecked = newChecked
     }
 

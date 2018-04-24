@@ -24,13 +24,20 @@
             android:name=".LoginActivity"
             android:label="@string/app_name"></activity>
         <activity android:name=".forecast.MainActivity">
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity android:name=".forecast.DetailActivity" />
+        <activity android:name=".forecast.MainNavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".forecast.DetailActivity" />
     </application>
 
 </manifest>

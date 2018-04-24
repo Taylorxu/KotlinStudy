@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rb_group"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/rb_0"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@drawable/selector_nv_bar0"
+        android:gravity="center_horizontal"
+        android:text="微笑"
+        android:textColor="@drawable/selector_bar_text_color"
+        />
+
+    <RadioButton
+        android:id="@+id/rb_1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@drawable/selector_nv_bar0"
+        android:gravity="center_horizontal"
+        android:text="微笑"
+        android:textColor="@drawable/selector_bar_text_color"
+        />
+
+    <RadioButton
+        android:id="@+id/rb_2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@drawable/selector_nv_bar0"
+        android:gravity="center_horizontal"
+        android:text="微笑"
+        android:textColor="@drawable/selector_bar_text_color"
+          />
+
+    <RadioButton
+        android:id="@+id/rb_3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableTop="@drawable/selector_nv_bar0"
+        android:gravity="center_horizontal"
+        android:text="微笑"
+        android:textColor="@drawable/selector_bar_text_color"
+        />
+</RadioGroup>
+

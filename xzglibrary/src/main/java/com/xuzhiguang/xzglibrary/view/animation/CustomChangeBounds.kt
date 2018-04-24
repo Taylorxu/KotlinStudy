@@ -1,4 +1,4 @@
-package com.xuzhiguang.kotlinstudybyself.forecast
+package com.xuzhiguang.xzglibrary.view.animation
 
 import android.animation.Animator
 import android.os.Build
@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils
 
 /**
  * Created by 徐志广 on 2018/4/23.
+ * 自定义 share element 的类, 单没有弧度轨迹
  */
 class CustomChangeBounds : ChangeBounds() {
     override fun createAnimator(sceneRoot: ViewGroup?, startValues: TransitionValues?, endValues: TransitionValues?): Animator {

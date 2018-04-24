@@ -24,11 +24,16 @@ import org.greenrobot.eventbus.ThreadMode
 /**
  * Created by 徐志广 on 2018/4/19.
  */
-class DetailActivity : BaseActivity() {
+class DetailActivity :AppCompatActivity() {
     var binding: ActivityDetailBinding? = null
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        var share = TransitionInflater.from(this).inflateTransition(R.transition.share_element)
+        window.sharedElementEnterTransition = share      //也可以是自定义的动画类 对象
+        window.sharedElementExitTransition = share
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
 
         EventBus.getDefault().register(this)  //事件注册

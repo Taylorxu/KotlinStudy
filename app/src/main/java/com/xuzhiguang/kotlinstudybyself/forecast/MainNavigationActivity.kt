@@ -52,8 +52,8 @@ class MainNavigationActivity : AppCompatActivity() {
     fun addFragment(fragment: Fragment?, listFragment: List<Fragment>?, containerViewId: Int) {
         val transaction = fragmentManager?.beginTransaction()
         if (fragment === null) {
-            for (fragment in listFragment!!) {
-                transaction?.add(containerViewId, fragment)
+           listFragment?.forEach{
+                transaction?.add(containerViewId, it)
             }
         } else {
             transaction?.add(containerViewId, fragment)

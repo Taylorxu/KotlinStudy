@@ -9,7 +9,7 @@ import com.xuzhiguang.kotlinstudybyself.R
 import kotlinx.android.synthetic.main.fragment_first.*
 
 /**
- * Created by Administrator on 2018/4/25.
+ * Created by 徐志广 on 2018/4/25.
  */
 class FirstFragment : Fragment() {
 

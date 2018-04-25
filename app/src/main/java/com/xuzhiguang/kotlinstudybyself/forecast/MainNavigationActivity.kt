@@ -13,7 +13,7 @@ import com.xuzhiguang.xzglibrary.view.xViewElement.XNavigationBar
 import kotlinx.android.synthetic.main.activity_main_navigation.*
 
 /**
- * Created by Administrator on 2018/4/24.
+ * Created by 徐志广 on 2018/4/24.
  */
 class MainNavigationActivity : AppCompatActivity() {
 

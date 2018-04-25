@@ -4,7 +4,8 @@
     android:id="@+id/rb_group"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <RadioButton
         android:id="@+id/rb_0"
@@ -14,7 +15,7 @@
         android:button="@null"
         android:drawableTop="@drawable/selector_nv_bar0"
         android:gravity="center_horizontal"
-        android:text="微笑"
+        android:text="Smile"
         android:textColor="@drawable/selector_bar_text_color"
       />
 
@@ -24,9 +25,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:button="@null"
-        android:drawableTop="@drawable/selector_nv_bar0"
+        android:drawableTop="@drawable/selector_nv_bar1"
         android:gravity="center_horizontal"
-        android:text="微笑"
+        android:text="Love"
         android:textColor="@drawable/selector_bar_text_color"
         />
 
@@ -36,9 +37,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:button="@null"
-        android:drawableTop="@drawable/selector_nv_bar0"
+        android:drawableTop="@drawable/selector_nv_bar2"
         android:gravity="center_horizontal"
-        android:text="微笑"
+        android:text="Awesome"
         android:textColor="@drawable/selector_bar_text_color"
       />
 
@@ -48,7 +49,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:button="@null"
-        android:drawableTop="@drawable/selector_nv_bar0"
+        android:drawableTop="@drawable/selector_nv_bar3"
         android:gravity="center_horizontal"
         android:text="微笑"
         android:textColor="@drawable/selector_bar_text_color"

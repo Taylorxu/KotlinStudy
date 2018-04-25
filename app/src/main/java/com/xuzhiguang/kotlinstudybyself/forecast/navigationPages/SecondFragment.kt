@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.xuzhiguang.kotlinstudybyself.R
 
 /**
- * Created by Administrator on 2018/4/25.
+ * Created by 徐志广 on 2018/4/25.
  */
 class SecondFragment : Fragment() {
 

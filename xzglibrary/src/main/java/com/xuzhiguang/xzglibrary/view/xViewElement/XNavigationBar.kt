@@ -3,24 +3,21 @@ package com.xuzhiguang.xzglibrary.view.xViewElement
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import com.xuzhiguang.xzglibrary.R
-import com.xuzhiguang.xzglibrary.R.id.rb_0
-import com.xuzhiguang.xzglibrary.R.id.rb_1
 import com.xuzhiguang.xzglibrary.helperTool.DensityHelper
-import com.xuzhiguang.xzglibrary.helperTool.LogHelper
 import kotlinx.android.synthetic.main.layout_navigation_bar_group.view.*
 import org.jetbrains.anko.forEachChild
 
 /**
  * 自定义 navigationBar
- * Created by Administrator on 2018/4/24.
+ * Created by 徐志广 on 2018/4/24.
  */
 class XNavigationBar : LinearLayout {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
+    var onCheckedChangeInterface: OnCheckedChangeListener? = null
     var p_top_c = DensityHelper.dp2px(8f)  //被选中时，paddingTop
     var p_top_ = DensityHelper.dp2px(10f)
     var p_bottom = DensityHelper.dp2px(8f)
@@ -74,6 +71,15 @@ class XNavigationBar : LinearLayout {
         oldChecked?.setPadding(0, p_top_, 0, p_bottom)
         oldChecked?.textSize = text_size_
         oldChecked = newChecked
+        onCheckedChangeInterface?.onCheckedChanged(newChecked.id)
+    }
+
+    fun setOnCheckedChangeListenter(listener: OnCheckedChangeListener) {
+        if (onCheckedChangeInterface === null) onCheckedChangeInterface = listener
+    }
+
+    interface OnCheckedChangeListener {
+        fun onCheckedChanged(checkedId: Int)
     }
 
 }

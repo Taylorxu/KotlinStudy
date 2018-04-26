@@ -34,6 +34,7 @@ class FirstFragment : Fragment() {
     }
 
     private fun initView() {
+        showSearchEdit()
         bt_search.setOnClickListener { showSearchEdit() }
         bt_search_cancel.setOnClickListener { hideSearchEdit() }
     }
@@ -43,9 +44,11 @@ class FirstFragment : Fragment() {
         bt_search.animate().rotationY(180f)
                 .alpha(0f)
                 .withEndAction { panel_frame.visibility = View.GONE }
+                .duration = 300
+
+        search_edit_text.animate().translationX(0f).alpha(1f)
                 .duration = 500
 
-        search_edit_text.animate().translationX(0f).alpha(1f).duration = 500
         bt_search_cancel.animate().rotationY(0f)
                 .alpha(1f)
                 .withStartAction { search_layout.visibility = View.VISIBLE }
@@ -61,11 +64,12 @@ class FirstFragment : Fragment() {
                 .withStartAction { panel_frame.visibility = View.VISIBLE }
                 .duration = 500
 
-        search_edit_text.animate().translationX(search_edit_text.width.toFloat()).alpha(0f).duration = 500
+        search_edit_text.animate().translationX(search_edit_text.width.toFloat()).alpha(0f)
+                .duration = 300
         bt_search_cancel.animate().rotationY(180f)
                 .alpha(0f)
                 .withEndAction { search_layout.visibility = View.GONE }
-                .duration = 500
+                .duration = 300
 
 
     }

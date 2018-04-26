@@ -9,73 +9,68 @@
         android:layout_height="48dp"
         android:background="#10FFFFFF">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/panel_frame"
-                android:layout_width="match_parent"
+                android:layout_width="296dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                android:layout_gravity="center">
 
                 <FrameLayout
                     android:id="@+id/bt_search"
                     android:layout_width="48dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="48dp"
+                    android:layout_gravity="right"
+                    android:background="@drawable/shape_circle_bg_prim"
+                    android:focusableInTouchMode="true">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_search"
-                        android:focusableInTouchMode="true" />
+                        android:background="@drawable/ic_search" />
                 </FrameLayout>
 
 
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/search_layout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
-                android:background="@drawable/shape_edit_text_alpha"
+                android:orientation="horizontal"
+                android:focusableInTouchMode="true"
                 android:visibility="gone">
 
                 <EditText
                     android:id="@+id/search_edit_text"
-                    android:layout_width="300dp"
-                    android:layout_height="38dp"
+                    android:layout_width="248dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:focusableInTouchMode="true"
+                    android:background="@drawable/shape_edit_text_alpha_left_part"
+
                     android:hint="请输入"
                     android:paddingLeft="15dp" />
 
                 <FrameLayout
                     android:id="@+id/bt_search_cancel"
                     android:layout_width="48dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_edit_text_alpha_right_part"
+                    >
 
                     <ImageView
-
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_cancel_search"
-                        android:focusableInTouchMode="true" />
+                        android:background="@drawable/ic_cancel_search" />
                 </FrameLayout>
             </LinearLayout>
-
-        </LinearLayout>
-
+        </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,11 +1,17 @@
 package com.xuzhiguang.kotlinstudybyself.forecast.navigationPages
 
+import android.animation.Animator
+import android.annotation.SuppressLint
 import android.content.Context
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat.animate
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.R.anim.search_in
@@ -32,23 +38,35 @@ class FirstFragment : Fragment() {
         bt_search_cancel.setOnClickListener { hideSearchEdit() }
     }
 
+    @SuppressLint("NewApi")
     fun showSearchEdit() {
-        val searchPanelOut = AnimationUtils.loadAnimation(this.activity, R.anim.search_panel_out)
-        panel_frame.startAnimation(searchPanelOut)
-        panel_frame.visibility = View.GONE
-        search_layout.visibility = View.VISIBLE
-        val searchIn = AnimationUtils.loadAnimation(this.activity, R.anim.search_in)
-        search_layout.startAnimation(searchIn)
+        bt_search.animate().rotationY(180f)
+                .alpha(0f)
+                .withEndAction { panel_frame.visibility = View.GONE }
+                .duration = 500
+
+        search_edit_text.animate().translationX(0f).alpha(1f).duration = 500
+        bt_search_cancel.animate().rotationY(0f)
+                .alpha(1f)
+                .withStartAction { search_layout.visibility = View.VISIBLE }
+                .duration = 500
+
 
     }
 
+    @SuppressLint("NewApi")
     fun hideSearchEdit() {
-        panel_frame.visibility = View.VISIBLE
-        val searchPanelIn = AnimationUtils.loadAnimation(this.activity, R.anim.search_panel_in)
-        panel_frame.startAnimation(searchPanelIn)
-        search_layout.visibility = View.GONE
-        val searchOut = AnimationUtils.loadAnimation(this.activity, R.anim.search_out)
-        search_layout.startAnimation(searchOut)
+        bt_search.animate().rotationY(0f)
+                .alpha(1f)
+                .withStartAction { panel_frame.visibility = View.VISIBLE }
+                .duration = 500
+
+        search_edit_text.animate().translationX(search_edit_text.width.toFloat()).alpha(0f).duration = 500
+        bt_search_cancel.animate().rotationY(180f)
+                .alpha(0f)
+                .withEndAction { search_layout.visibility = View.GONE }
+                .duration = 500
+
 
     }
 }

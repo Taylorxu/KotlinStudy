@@ -7,25 +7,26 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#10FFFFFF">
+        >
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
             <FrameLayout
                 android:id="@+id/panel_frame"
                 android:layout_width="286dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+             >
 
                 <FrameLayout
                     android:id="@+id/bt_search"
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/shape_circle_bg_prim"
-                    android:focusableInTouchMode="true">
+                    android:background="@drawable/shape_circle_bg_prim">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -34,36 +35,12 @@
                         android:background="@drawable/ic_search" />
                 </FrameLayout>
 
-
-            </FrameLayout>
-
-            <LinearLayout
-                android:id="@+id/search_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal"
-                android:visibility="gone"
-
-
-                >
-
-                <EditText
-                    android:id="@+id/search_edit_text"
-                    android:layout_width="248dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:alpha="0"
-                    android:background="@drawable/shape_edit_text_alpha_left_part"
-                    android:hint="请输入"
-                    android:paddingLeft="15dp" />
-
                 <FrameLayout
                     android:id="@+id/bt_search_cancel"
                     android:layout_width="38dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape_edit_text_alpha_right_part">
+                    android:layout_height="38dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="24dp"
@@ -71,7 +48,28 @@
                         android:layout_gravity="center"
                         android:background="@drawable/ic_cancel_search" />
                 </FrameLayout>
-            </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/search_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_edit_text_alpha_right_part"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/search_edit_text"
+                    android:layout_width="248dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:hint="请输入"
+                    android:paddingLeft="10dp" />
+
+
+            </FrameLayout>
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 

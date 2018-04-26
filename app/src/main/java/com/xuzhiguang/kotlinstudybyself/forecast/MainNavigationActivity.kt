@@ -30,7 +30,8 @@ class MainNavigationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_navigation)
         navigation_bar_group.setOnCheckedChangeListenter(barCheckListener)
         fragmentManager = supportFragmentManager
-        addFragment(firstFragment, null, R.id.frame_layout_content)
+        addFragment(null, fragmentList, R.id.frame_layout_content)
+        showOrhideFragment(fragmentList[0])
     }
 
     /**
@@ -74,16 +75,16 @@ class MainNavigationActivity : AppCompatActivity() {
         override fun onCheckedChanged(checkedId: Int) {
             when (checkedId) {
                 com.xuzhiguang.xzglibrary.R.id.rb_0 -> {
-                    replacrFragment(firstFragment)
+                    showOrhideFragment(firstFragment)
                 }
                 com.xuzhiguang.xzglibrary.R.id.rb_1 -> {
-                    replacrFragment(secondFragment)
+                    showOrhideFragment(secondFragment)
                 }
                 com.xuzhiguang.xzglibrary.R.id.rb_2 -> {
-                    replacrFragment(thirdFragment)
+                    showOrhideFragment(thirdFragment)
                 }
                 com.xuzhiguang.xzglibrary.R.id.rb_3 -> {
-                    replacrFragment(fourthFragment)
+                    showOrhideFragment(fourthFragment)
                 }
 
             }

@@ -31,10 +31,11 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.transition.TransitionInflater
 import android.view.Window
+import com.xuzhiguang.xzglibrary.view.xViewElement.XSearchView
+import org.jetbrains.anko.find
 
 
 class MainActivity : AppCompatActivity() {
-
 
     //不可操作list
     private val items = listOf(

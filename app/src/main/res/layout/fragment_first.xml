@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/first_fragment_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,70 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         >
-
-        <FrameLayout
-            android:id="@+id/root_search_layout"
+        <com.xuzhiguang.xzglibrary.view.xViewElement.XSearchView
+            android:id="@+id/search_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center">
-
-            <FrameLayout
-                android:id="@+id/panel_frame"
-                android:layout_width="286dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-             >
-
-                <FrameLayout
-                    android:id="@+id/bt_search"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:layout_gravity="right|center_vertical"
-                    android:background="@drawable/shape_circle_bg_prim">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_search" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/bt_search_cancel"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:layout_gravity="right|center_vertical"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/ic_cancel_search" />
-                </FrameLayout>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/search_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/shape_edit_text_alpha_right_part"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/search_edit_text"
-                    android:layout_width="248dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:hint="请输入"
-                    android:paddingLeft="10dp" />
-
-
-            </FrameLayout>
-        </FrameLayout>
+            android:layout_gravity="center"
+            />
     </android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>

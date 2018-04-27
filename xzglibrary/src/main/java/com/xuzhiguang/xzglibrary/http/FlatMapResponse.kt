@@ -9,9 +9,9 @@ import java.io.IOException
  * Response retorfit 接口 返回的第一层 response
  * 通过Observable在将返回的结果发送到下一层
  */
-class FlatMapResponse<T>   {
+object FlatMapResponse {
 
-    fun call(t: Response<T>): Observable<T> {
+    fun <T> call(t: Response<T>): Observable<T> {
         return if (t.isSuccessful) {
             Observable.just(t.body())
         } else {

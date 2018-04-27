@@ -9,12 +9,12 @@ import rx.Observable
  * Observable<T> 泛型 决定subscriber中的泛型
  *
  */
-class FlatMapResult<T> {
-    fun call(t: ResultModel<T>): Observable<T> {
-        return if (0 == t.Status) {
-            Observable.just(t.rows)
+object FlatMapResult {
+    fun <T>call(t: ResultModel<T>): Observable<T> {
+        return if (200 == t.status) {
+            Observable.just(t.data)
         } else {
-            Observable.error(Error(t.Status, t.Reason))
+            Observable.error(Error(t.status, t.message))
         }
     }
 }

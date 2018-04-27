@@ -20,11 +20,7 @@ open abstract class XAdapter<Data, Binding : ViewDataBinding> : RecyclerView.Ada
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): XViewHolder<Data, Binding> {
         var viewHolder: XViewHolder<Data, Binding>? = XViewHolder(LayoutInflater.from(parent?.context).inflate(holderLayout(viewType), parent, false))
         if (itemClickListener != null)
-            viewHolder?.binding?.root?.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    itemClickListener?.onItemClick(viewHolder)
-                }
-            })
+            viewHolder?.binding?.root?.setOnClickListener { itemClickListener?.onItemClick(viewHolder) }
         return viewHolder!!
     }
 
@@ -38,7 +34,7 @@ open abstract class XAdapter<Data, Binding : ViewDataBinding> : RecyclerView.Ada
     }
 
     //variableId 是R.layout.xxx 中<layout><data></data></layout> BR.data
-    open class SimpleAdapter<Data, Binding : ViewDataBinding>(var variableId: Int, var holderLayout: Int) : XAdapter<Data, Binding>() {
+    open class SimpleAdapter<Data, Binding : ViewDataBinding>(private var variableId: Int, private var holderLayout: Int) : XAdapter<Data, Binding>() {
 
         //holderLayout 是R.layout.xxx 布局文件在资源中ID
         override fun holderLayout(viewType: Int): Int {

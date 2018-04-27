@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.xuzhiguang.kotlinstudybyself.forecast.WeatherBean" />
+            type="com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.Forecast" />
     </data>
 
     <FrameLayout
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.city}"
+                android:text="@{data.fx}"
                 android:textSize="15sp"
 
                 />
@@ -39,13 +39,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.case}"
+                android:text="@{data.fl}"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{data.date}"
+                android:text="@{data.notice}"
                 android:textSize="15sp" />
 
 

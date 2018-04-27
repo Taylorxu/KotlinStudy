@@ -14,6 +14,7 @@ import android.view.Window
 import com.xuzhiguang.kotlinstudybyself.R
 import com.xuzhiguang.kotlinstudybyself.databinding.ActivityDetailBinding
 import com.xuzhiguang.kotlinstudybyself.forecast.base.BaseActivity
+import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.Forecast
 import com.xuzhiguang.xzglibrary.helperTool.CrossFadeHelper
 import com.xuzhiguang.xzglibrary.helperTool.Passenger
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -42,7 +43,7 @@ class DetailActivity :AppCompatActivity() {
 
     //事件订阅
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    fun setMessage(passenger: Passenger<WeatherBean>) {
+    fun setMessage(passenger: Passenger<Forecast>) {
         if (passenger.code == 1) binding?.data = passenger.extra
 
     }

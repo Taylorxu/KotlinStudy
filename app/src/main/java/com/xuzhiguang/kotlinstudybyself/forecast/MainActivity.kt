@@ -23,42 +23,39 @@ import org.jetbrains.anko.startActivity
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import android.R.transition.explode
-import android.annotation.TargetApi
 import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
+import android.graphics.*
 import android.os.Build
 import android.support.annotation.RequiresApi
-import android.transition.TransitionInflater
-import android.view.Window
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.Forecast
 import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.Weather
 import com.xuzhiguang.xzglibrary.helperTool.LogHelper
-import com.xuzhiguang.xzglibrary.view.xViewElement.XSearchView
-import org.jetbrains.anko.find
+import com.xuzhiguang.xzglibrary.view.recycleViewExtension.ItemDecorationEx
+import com.xuzhiguang.xzglibrary.view.recycleViewExtension.LineItemDecoration
+import org.jetbrains.anko.Android
 
 
 class MainActivity : AppCompatActivity() {
-
-    var dataList = mutableListOf<Forecast>()
     var currentPage = 1
-
+    var footerView: LoadMoreFooterView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getData(1)
         initView()
     }
 
-    var footerView: LoadMoreFooterView? = null
+
     private fun initView() {
-        xToolbar.setTitle("main Page")
-        xToolbar.setBack(true, this)
         forecast_list.layoutManager = LinearLayoutManager(this)
         forecast_list.iAdapter = adapter
         forecast_list.setOnRefreshListener { refreshData() }
         footerView = forecast_list.loadMoreFooterView as LoadMoreFooterView?
         forecast_list.setOnLoadMoreListener { onLoadMore() }
+        forecast_list.addItemDecoration(ItemDecorationEx.LineDecoration(baseContext))
         forecast_list.post {
             forecast_list.setRefreshing(true)
         }
@@ -75,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             var intent = Intent(this@MainActivity, DetailActivity().javaClass)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, h.binding.root, "text_weather").toBundle())
             var passenger = Passenger<Forecast>(1)
-            passenger.extra =h.binding.data
+            passenger.extra = h.binding.data
             EventBus.getDefault().postSticky(passenger)
 
         }
@@ -113,9 +110,8 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             adapter.addItems(t?.forecast as MutableList<Forecast>)
                         }
-                        footerView?.setStatus(if (t?.forecast.size < 20) LoadMoreFooterView.Status.THE_END else LoadMoreFooterView.Status.GONE)
+                        footerView?.setStatus(if (t.forecast.size < 20) LoadMoreFooterView.Status.THE_END else LoadMoreFooterView.Status.GONE)
                         currentPage += 1
-                        LogHelper.e(currentPage.toString() + "currentPagecurrentPagecurrentPagecurrentPagecurrentPage")
                     }
 
                     override fun onCompleted() {
@@ -125,6 +121,8 @@ class MainActivity : AppCompatActivity() {
                     override fun onError(e: Throwable?) {
                         Log.e(localClassName + "74r", e?.printStackTrace().toString())
                         NiceToast.toast("获取天气列表失败${e?.message}")
+                        forecast_list.setRefreshing(false)
+                        footerView?.setStatus(LoadMoreFooterView.Status.GONE)
                     }
 
                 })

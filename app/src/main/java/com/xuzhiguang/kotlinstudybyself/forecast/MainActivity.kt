@@ -36,6 +36,7 @@ import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.Weather
 import com.xuzhiguang.xzglibrary.helperTool.LogHelper
 import com.xuzhiguang.xzglibrary.view.recycleViewExtension.ItemDecorationEx
 import com.xuzhiguang.xzglibrary.view.recycleViewExtension.LineItemDecoration
+import kotlinx.android.synthetic.main.activity_detail.view.*
 import org.jetbrains.anko.Android
 
 
@@ -59,26 +60,18 @@ class MainActivity : AppCompatActivity() {
         forecast_list.post {
             forecast_list.setRefreshing(true)
         }
-        adapter.itemClickListener = onItemClickListenter
 
     }
 
-    var adapter: XAdapter<Forecast, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast)
 
-    //添加item监听事件
-    var onItemClickListenter: XAdapter.OnItemClickListener<Forecast, ItemForeCastBinding> = object : XAdapter.OnItemClickListener<Forecast, ItemForeCastBinding> {
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        override fun onItemClick(h: XViewHolder<Forecast, ItemForeCastBinding>) {
-            var intent = Intent(this@MainActivity, DetailActivity().javaClass)
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, h.binding.root, "text_weather").toBundle())
-            var passenger = Passenger<Forecast>(1)
-            passenger.extra = h.binding.data
-            EventBus.getDefault().postSticky(passenger)
-
-        }
-
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    var adapter: XAdapter<Forecast, ItemForeCastBinding> = XAdapter.SimpleAdapter(BR.data, R.layout.item_fore_cast) { forecast, itemView ->
+        var intent = Intent(this@MainActivity, DetailActivity().javaClass)
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, itemView.root, "text_weather").toBundle())
+        var passenger = Passenger<Forecast>(1)
+        passenger.extra = forecast
+        EventBus.getDefault().postSticky(passenger)
     }
-
 
     private fun refreshData() {
         currentPage = 1

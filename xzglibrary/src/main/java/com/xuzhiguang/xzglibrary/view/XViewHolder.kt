@@ -11,7 +11,7 @@ import android.view.View
 class XViewHolder<Data, Binding : ViewDataBinding>(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     var binding: Binding = DataBindingUtil.bind(itemView)
 
-    fun fill(variableId: Int, data: Data) {
+    fun fill(variableId: Int, data: Data ) {
         binding.setVariable(variableId, data)
     }
 }

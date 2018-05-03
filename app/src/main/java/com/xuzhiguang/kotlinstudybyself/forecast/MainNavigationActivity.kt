@@ -11,6 +11,10 @@ import com.xuzhiguang.kotlinstudybyself.forecast.navigationPages.SecondFragment
 import com.xuzhiguang.kotlinstudybyself.forecast.navigationPages.ThirdFragment
 import com.xuzhiguang.xzglibrary.view.xViewElement.XNavigationBar
 import kotlinx.android.synthetic.main.activity_main_navigation.*
+import android.widget.Toast
+import com.xuzhiguang.xzglibrary.helperTool.NiceToast
+import java.util.*
+
 
 /**
  * Created by 徐志广 on 2018/4/24.
@@ -53,7 +57,7 @@ class MainNavigationActivity : AppCompatActivity() {
     fun addFragment(fragment: Fragment?, listFragment: List<Fragment>?, containerViewId: Int) {
         val transaction = fragmentManager?.beginTransaction()
         if (fragment === null) {
-           listFragment?.forEach{
+            listFragment?.forEach {
                 transaction?.add(containerViewId, it)
             }
         } else {
@@ -90,6 +94,24 @@ class MainNavigationActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+
+    override fun onBackPressed() {
+        var mBackKeyPressed = false
+        if (!mBackKeyPressed) {
+            NiceToast.toast("再按一次退出程序")
+            mBackKeyPressed = true
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    mBackKeyPressed = false
+                }
+            }, 2000)
+
+        } else {
+            this.finish()
+            System.exit(0)
+        }
     }
 
 

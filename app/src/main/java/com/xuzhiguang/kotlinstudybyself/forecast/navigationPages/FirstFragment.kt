@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import com.xuzhiguang.kotlinstudybyself.forecast.db.service.dataClass.Weather
 import com.xuzhiguang.xzglibrary.helperTool.NiceToast
 import com.xuzhiguang.xzglibrary.helperTool.Passenger
 import com.xuzhiguang.xzglibrary.http.FlatMapResponse
-import com.xuzhiguang.xzglibrary.http.FlatMapResult
 import com.xuzhiguang.xzglibrary.view.XAdapter
 import com.xuzhiguang.xzglibrary.view.recycleViewExtension.ItemDecorationEx
 import com.xuzhiguang.xzglibrary.view.recycleViewExtension.footer.LoadMoreFooterView
@@ -93,8 +91,8 @@ class FirstFragment : Fragment() {
         APIService.get().getWeather()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap { t -> FlatMapResponse.call(t) }
-                .flatMap { t -> FlatMapResult.call(t) }
+                .flatMap { t -> FlatMapResponse.callResponse(t) }
+                .flatMap { t -> FlatMapResponse.callResult(t) }
                 .subscribe(object : Subscriber<Weather>() {
                     override fun onNext(t: Weather?) {
                         if (page == 1) {

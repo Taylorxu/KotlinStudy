@@ -106,10 +106,10 @@ class MainNavigationActivity : AppCompatActivity() {
                 override fun run() {
                     mBackKeyPressed = false
                 }
-            }, 2000)
+            }, 4000)
 
         } else {
-            this.finish()
+            finish()
             System.exit(0)
         }
     }

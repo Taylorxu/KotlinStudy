@@ -3,7 +3,6 @@ package com.xuzhiguang.xzglibrary.view
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 
 /**
@@ -24,7 +23,7 @@ open abstract class XAdapter<Data, Binding : ViewDataBinding> : RecyclerView.Ada
     abstract fun holderLayout(viewType: Int): Int
 
     //variableId 是R.layout.xxx 中<layout><data></data></layout> BR.data
-    open class SimpleAdapter<Data, Binding : ViewDataBinding>(private var variableId: Int, private var holderLayout: Int, private val itemClick: (Data, Binding) -> Unit) : XAdapter<Data, Binding>() {
+    open class SimpleAdapter<Data, Binding : ViewDataBinding>(private var variableId: Int, private var holderLayout: Int, private var itemClick: ((Data, Binding) -> Unit)? =null) : XAdapter<Data, Binding>() {
 
         //holderLayout 是R.layout.xxx 布局文件在资源中ID
         override fun holderLayout(viewType: Int): Int {
@@ -33,7 +32,7 @@ open abstract class XAdapter<Data, Binding : ViewDataBinding> : RecyclerView.Ada
 
         override fun onBindViewHolder(holder: XViewHolder<Data, Binding>?, position: Int) {
             holder?.fill(variableId, dataList!![position])
-            holder?.itemView?.setOnClickListener { itemClick(dataList!![position], holder?.binding) }
+            holder?.itemView?.setOnClickListener { itemClick?.invoke(dataList!![position], holder?.binding) }
         }
 
 
